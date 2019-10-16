@@ -38,6 +38,12 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
             }
 
+            app.Use((context, next) =>
+            {
+                context.Request.EnableBuffering();
+                return next();
+            });
+            
             app.UseRouting();
 
             app.UseAuthorization();
