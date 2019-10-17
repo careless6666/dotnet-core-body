@@ -52,9 +52,8 @@ namespace WebApplication
             {
                 builder.Run(async context =>
                 {
-                    context.Request.EnableBuffering();
-
                     var reader = await context.Request.BodyReader.ReadAsync();
+                    context.Request.Body.Position = 0;
                     var buffer = reader.Buffer;
                     var sp = Encoding.UTF8.GetString(buffer.FirstSpan);
                     Console.WriteLine("From handler");
